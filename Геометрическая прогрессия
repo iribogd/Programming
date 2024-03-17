@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+
+using namespace std;
+
+int generateRandomNumber() {
+    return rand() % 10 + 1; // 
+}
+
+int main() {
+    srand(time(0)); //
+
+    cout << "brain-progression\nWelcome to the Brain Games!\nMay I have your name? ";
+    string name;
+    getline(cin, name);
+    cout << "Hello, " << name << "!\n";
+
+    const int length = generateRandomNumber() + 5;
+    vector<int> p;
+    int index = rand() % length;
+
+    for (int i = 0; i < length; ++i) {
+        p.push_back(generateRandomNumber() * (i + 1));
+    }
+
+    cout << "What number is missing in the progression?\n";
+
+    for (int i = 0; i < length; ++i) {
+        if (i == index) {
+            cout << ".. ";
+        } else {
+            cout << p[i] << " ";
+        }
+    }
+
+    cout << "\nYour answer: ";
+    int answer;
+    cin >> answer;
+
+    if (answer == p[index]) {
+        cout << "Correct!\n";
+    } else {
+        cout << "'" << answer << "' is the wrong answer ;(. Correct answer was '" << p[index] << "'.\n";
+        cout << "Let's try again, " << name << "!\n";
+    }
+
+    return 0;
+}
