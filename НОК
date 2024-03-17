@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
+
+int least(int a, int b, int c) {
+    return lcm(a, lcm(b, c));
+}
+
+vector<int> randnum() {
+    vector<int> n;
+    for (int i = 0; i < 3; ++i) {
+        n.push_back(rand() % 100 + 1);
+    }
+    return n;
+}
+
+int main() {
+    srand(time(nullptr));
+
+    cout << "Welcome to the Brain Games!" << endl;
+    cout << "May I have your name? ";
+    string name;
+    cin >> name;
+    cout << "Hello, " << name << "!" << endl;
+    cout << "Find the smallest common multiple of given numbers." << endl;
+
+    int correct = 0;
+    for (int i = 0; i < 3; ++i) {
+        vector<int> n = randnum();
+        cout << "Question: " << n[0] << " " << n[1] << " " << n[2] << endl;
+
+        int userans;
+        cout << "Your answer: ";
+        cin >> userans;
+
+        if (least(n[0], n[1], n[2]) == userans) {
+            cout << "Correct!" << endl;
+            correct++;
+        } else {
+            cout << "'" << userans << "' is wrong answer ;(. Correct answer was '" 
+                      << least(n[0], n[1], n[2]) << "'." << endl;
+            cout << "Let's try again, " << name << "!" << endl;
+            break;
+        }
+    }
+
+    if (correct == 3) {
+        cout << "Congratulations, " << name << "!" << endl;
+    }
+
+    return 0;
+}
