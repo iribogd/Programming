@@ -1,21 +1,31 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <string>
 #include <vector>
-
 using namespace std;
 
-int generateRandomNumber() {
-    return rand() % 10 + 1; // 
-}
-
-int main() {
-    srand(time(0)); //
-
+void greetPlayer() {
     cout << "brain-progression\nWelcome to the Brain Games!\nMay I have your name? ";
     string name;
     getline(cin, name);
     cout << "Hello, " << name << "!\n";
+}
+
+void displayWinMessage(const string& name) {
+    cout << "Correct!\n";
+}
+
+void displayLoseMessage(const string& name, int correctAnswer) {
+    cout << "Wrong answer ;(. Correct answer was '" << correctAnswer << "'.\n";
+    cout << "Let's try again, " << name << "!\n";
+}
+
+int generateRandomNumber() {
+    return rand() % 10 + 1;
+}
+
+int main() {
+    srand(time(0));
+    greetPlayer();
 
     const int length = generateRandomNumber() + 5;
     vector<int> p;
@@ -40,10 +50,9 @@ int main() {
     cin >> answer;
 
     if (answer == p[index]) {
-        cout << "Correct!\n";
+        displayWinMessage("Player1");
     } else {
-        cout << "'" << answer << "' is the wrong answer ;(. Correct answer was '" << p[index] << "'.\n";
-        cout << "Let's try again, " << name << "!\n";
+        displayLoseMessage("Player1", p[index]);
     }
 
     return 0;
