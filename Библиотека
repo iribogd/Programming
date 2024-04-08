@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void greetPlayer() {
+    cout << "Welcome to the Game!" << endl;
+    cout << "May I have your name? ";
+    string name;
+    cin >> name;
+    cout << "Hello, " << name << "!" << endl;
+}
+
+void displayWinMessage(const string& name) {
+    cout << "Congratulations, " << name << "! You won the game!" << endl;
+}
+
+void displayLoseMessage(const string& name) {
+    cout << "Sorry, " << name << ". You lost the game. Better luck next time!" << endl;
+}
